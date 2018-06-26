@@ -1,0 +1,31 @@
+
+public final class Test {
+    public static void main(String[] args) {
+        System.out.println(getCallerClassAndMethodName());
+        anotherMethod();
+        //StackTraceElement[] ste = new Exception().getStackTrace();
+
+
+    }
+
+    private static void anotherMethod() {
+          anotherMethod1();
+    }
+    private static void anotherMethod1() {
+        System.out.println(getCallerClassAndMethodName());
+    }
+
+
+    public static String getCallerClassAndMethodName() {
+        StackTraceElement[] stackTrace = new Exception().getStackTrace();
+        if (stackTrace.length <= 2) {
+            return null;
+        }
+        //System.out.println(stackTrace.length+" "+stackTrace[0]);
+        else {
+            // System.out.println(stackTrace.length+" "+stackTrace[0]);
+            return stackTrace[3].getClassName() + "#" + stackTrace[3].getMethodName();
+        }
+
+    }
+}
